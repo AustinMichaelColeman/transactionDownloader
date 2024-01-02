@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Transaction Downloader for Wells Fargo",
+  "version": "1.0",
+  "description": "Automate downloading transaction data from Wells Fargo.",
+  "permissions": ["activeTab", "tabs", "downloads"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://connect.secure.wellsfargo.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
