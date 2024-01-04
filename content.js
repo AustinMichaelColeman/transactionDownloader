@@ -6,29 +6,21 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 async function downloadStatements() {
   await selectFileFormat();
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await delayForDOMUpdate();
+  await clickDropdown();
+  const accounts = getAccounts();
 
-  var dropdownToggle = document.querySelector('div[data-testid="Toggle"]');
-  if (dropdownToggle) {
-    dropdownToggle.click();
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  }
-  const accountCount = document
-    .querySelector('ul[aria-label="Account"]')
-    .querySelectorAll("li").length;
-
-  for (let i = 0; i < accountCount; i++) {
+  for (let i = 0; i < accounts.length; i++) {
     if (i !== 0) {
-      var dropdownToggle = document.querySelector('div[data-testid="Toggle"]');
-      dropdownToggle.click();
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // skip first dropdown click, dropdown already open
+      await clickDropdown();
     }
-    const accountList = document.querySelector('ul[aria-label="Account"]');
-    const accounts = accountList.querySelectorAll("li");
+    // need to refresh accounts reference for clicking to work
+    const accounts = getAccounts();
     const account = accounts[i];
     account.click();
     try {
-      await waitForElementToDisappear('div[data-testid="spinner"]');
+      await waitForSpinnerToDisappear();
     } catch (error) {
       console.error(error);
       continue; // Skip this iteration if the spinner doesn't disappear
@@ -46,17 +38,38 @@ async function downloadStatements() {
     );
     // Create a filename based on the account details and date range
     const fileName = `${toDateValue}_${fromDateValue}_${accountName}.csv`;
-    console.log("filename", fileName);
 
     await clickDownload(fileName);
 
     try {
-      await waitForElementToDisappear('div[data-testid="spinner"]');
+      await waitForSpinnerToDisappear();
     } catch (error) {
       console.error(error);
       continue; // Skip this iteration if the spinner doesn't disappear
     }
   }
+}
+
+async function clickDropdown() {
+  var dropdownToggle = document.querySelector('div[data-testid="Toggle"]');
+  if (dropdownToggle) {
+    dropdownToggle.click();
+    await delayForDOMUpdate();
+  }
+}
+
+function delayForDOMUpdate(duration = 1000) {
+  return new Promise((resolve) => setTimeout(resolve, duration));
+}
+
+async function waitForSpinnerToDisappear() {
+  await waitForElementToDisappear('div[data-testid="spinner"]');
+}
+
+function getAccounts() {
+  return document
+    .querySelector('ul[aria-label="Account"]')
+    .querySelectorAll("li");
 }
 
 function formatDateValue(date) {
