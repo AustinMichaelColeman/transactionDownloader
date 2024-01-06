@@ -2,12 +2,17 @@
 <html>
   <head>
     <title>Transaction Downloader</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
     <div>
-      <h1>Transaction Downloader for Wells Fargo</h1>
+      <h1>Transaction Downloader</h1>
+      <h2>for Wells Fargo</h2>
       <button id="download-button">Download All</button>
-      <div id="error-message"></div>
+      <div id="error-message" class="error">
+        <span id="error-text"></span>
+        <button id="dismiss-button" class="dismiss-button">x</button>
+      </div>
     </div>
     <script src="popup.js"></script>
   </body>

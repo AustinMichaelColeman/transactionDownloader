@@ -1,0 +1,83 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  width: 400px;
+}
+
+div {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #0055a4;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#download-button {
+  background-color: #0055a4;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+#download-button:hover {
+  background-color: #003d73;
+}
+
+.error.visible {
+  opacity: 1;
+  height: auto;
+  padding: 15px 20px;
+  margin-top: 20px;
+  transition-delay: 0s;
+}
+
+.error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-top: 30px;
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: normal;
+  color: #333;
+  text-align: left;
+  padding-left: 10px;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+  padding: 0 20px;
+  margin-top: 0;
+  transition: opacity 0.5s, height 0.5s, padding 0.5s, margin-top 0.5s;
+}
+
+#error-message .dismiss-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  color: #721c24;
+  cursor: pointer;
+  font-size: 16px;
+}

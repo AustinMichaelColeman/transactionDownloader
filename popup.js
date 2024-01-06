@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const downloadButton = document.getElementById("download-button");
-  downloadButton.addEventListener("click", handleDownloadClick);
+  handleClick("download-button", handleDownloadClick);
+  handleClick("dismiss-button", clearErrorMessage);
 });
+
+function handleClick(elementId, callback) {
+  const element = document.getElementById(elementId);
+  element.addEventListener("click", callback);
+}
 
 function handleDownloadClick() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -36,13 +41,12 @@ function showWrongPageError() {
 
 function showError(message) {
   var errorMessage = document.getElementById("error-message");
-  errorMessage.textContent = "Error: " + message;
-  errorMessage.style.color = "red";
-  errorMessage.style.display = "block"; // Show the element
+  var errorText = document.getElementById("error-text");
+  errorText.textContent = message;
+  errorMessage.classList.add("visible");
 }
 
 function clearErrorMessage() {
   var errorMessage = document.getElementById("error-message");
-  errorMessage.textContent = "";
-  errorMessage.style.display = "none"; // Hide the element
+  errorMessage.classList.remove("visible");
 }
