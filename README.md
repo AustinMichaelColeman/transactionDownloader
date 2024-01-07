@@ -1,10 +1,12 @@
+# Transaction Downloader
+
 Automate downloading transaction data from Wells Fargo using this Transaction Downloader chrome extension.
 
 This extension helps you save time by automating the downloading and naming of the csv files that you can already download from the Wells Fargo website. It automatically downloads a csv for each account with the default date range, and includes this data in the csv file name.
 
 It was designed to work with https://github.com/AustinMichaelColeman/psyfolio - an automated financial analysis and budgeting project for Google Sheets
 
-How to use it:
+## How to use it:
 
 1. Install the extension
 2. Close and open Chrome
